@@ -18,7 +18,7 @@ fn bench_bloom_set_check_10_80(b: &mut Bencher) {
 
 #[bench]
 fn bench_bloom_set_check_fp_rate_0_1(b: &mut Bencher) {
-    let mut bloom = Bloom::new_for_fp_rate(1_000_000, 0.1);
+    let mut bloom = Bloom::new_for_fp_rate(1_000_000_000, 0.01);
     let mut i: usize = 0;
     b.iter(|| {
         bloom.set(&i);

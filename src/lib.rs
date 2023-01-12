@@ -8,6 +8,7 @@
 
 #![warn(non_camel_case_types, non_upper_case_globals, unused_qualifications)]
 #![allow(clippy::unreadable_literal, clippy::bool_comparison)]
+#![feature(test)]
 
 use bit_vec::BitVec;
 #[cfg(feature = "random")]
@@ -18,16 +19,20 @@ use std::f64;
 use std::hash::{Hash, Hasher};
 use std::marker::PhantomData;
 
+#[cfg(feature = "bench")]
+#[cfg(test)]
+mod bench;
+
 #[cfg(feature = "serde")]
 use siphasher::reexports::serde;
 
 pub mod reexports {
-    #[cfg(feature = "random")]
-    pub use ::getrandom;
     pub use bit_vec;
+    #[cfg(feature = "random")]
+    pub use getrandom;
+    pub use siphasher;
     #[cfg(feature = "serde")]
     pub use siphasher::reexports::serde;
-    pub use siphasher;
 }
 
 /// Bloom filter structure
